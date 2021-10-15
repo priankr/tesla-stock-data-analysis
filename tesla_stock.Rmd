@@ -1,0 +1,235 @@
+---
+title: "Tesla Stock Data Analysis"
+output: html_notebook
+---
+Analysis of a Tesla Inc. (TSLA) historical stock price dataset from NASDAQ Historical Data: https://www.nasdaq.com/market-activity/stocks/tsla/historical
+
+The dataset contains date, stock open/close prices, stock price daily high/low and volume of shares traded over the past 5 years as of October 15th, 2021. 
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(gghighlight)
+library(forecast)
+
+#Importing the csv file to a Data Frame
+tesla <- read.csv("tesla_stock.csv")
+
+#Viewing the Data Frame
+head(tesla)
+```
+
+# Data Cleaning and Preparation
+In this stage the data is checked for accuracy and completeness prior to beginning the analysis. Some of the issues addressed are as follows:
+
+- Remove extraneous data
+- Check for in missing values
+- Replace missing values
+- Delete data that cannot be corrected/replaced
+- Correct any data formatting issues
+- Creating new features
+- Identify errors revealed when new variables are created
+
+## Missing Values
+```{r}
+#Identifying total number of missing values
+sum(is.na(tesla))
+```
+There are no missing values. 
+
+## Correcting Formatting Issues
+```{r}
+#Checking the data types
+str(tesla)
+```
+We need to format the Date column as date values and format the Close.Last, Open, High and Low as numbers.
+
+```{r}
+#Formatting the Date column as date values
+tesla$Date <- as.Date(tesla$Date, "%m/%d/%Y")
+
+#Formatting Close.Last, Open, High and Low as numbers rounded to 2 decimal places
+#(gsub("[$]","", column_name) allows us to remove the Dollar sign from the character string
+tesla$Close.Last <-  round(as.numeric(gsub("[$]","", tesla$Close.Last)),2)
+tesla$Open <-  round(as.numeric(gsub("[$]","", tesla$Open)),2)
+tesla$High <-  round(as.numeric(gsub("[$]","", tesla$High)),2)
+tesla$Low <- round(as.numeric(gsub("[$]","", tesla$Low)),2)
+
+head(tesla)
+
+```
+## Creating New Features
+### Moving Average
+We will create a new column to track the moving average of the daily Closing Stock Price over a set period. The moving average smooths out the stock price price data by creating a constantly updated average stock price. We will track the moving average across two periods:
+
+- 7 Day Period
+- 30 Day Period
+
+```{r}
+#Calculating a moving average for stock price over the last 7 days
+tesla$Moving_Average_7_Day <- round(ma(tesla$Close.Last, 7),2)
+tesla$Moving_Average_30_Day <- round(ma(tesla$Close.Last, 30),2)
+```
+
+## Identify Issues Revealed due to New Features
+The Moving averages calculate an average based on previous data over the set period. However, for cases where there is not enough previous data, the moving average cannot calculate a value and leaves a missing value. To rectify these missing values we will have to remove the associated rows.
+```{r}
+#Removing rows with missing data
+tesla <- na.omit(tesla)
+```
+
+# Exploratory Data Analysis
+In this stage, we will examine the data to identify any patterns, trends and relationships between the variables. It will help us analyze the data and extract insights that can be used to make decisions.
+
+Data Visualization will give us a clear idea of what the data means by giving it visual context.
+
+## Statistics
+Lets take a look at the data as a whole to understand how the Tesla Stock Price has varied over the last 5 years.
+```{r}
+summary(tesla)
+```
+As seen in the summary above:
+
+- Oldest data point is from <b>2016-11-07</b> and the most recent data point is from <b>2021-09-23</b>. 
+- Highest Closing Stock Price was <b>$883.09</b>, while the lowest Closing Stock Price <b>$35.79</b>.
+- Highest Opening Stock Price was <b>$891.38</b>, while the lowest Opening Stock Price <b>$36.22</b>.
+- The Highest Stock Price over the past 5 years was <b>$900.40</b>.
+- The Lowest Stock Price over the past 5 years was <b>$35.40</b>.
+- The Volume of Stocks traded averaged around <b>45 million</b> with a maximum of around <b>304 million</b>.  
+
+## Tesla Stock Performace
+
+```{r}
+ggplot(tesla, aes(x=Date)) + 
+  geom_line(aes(y = Close.Last, colour="Close Price")) + 
+  geom_line(aes(y =  Open, colour="Open Price")) +
+  geom_line(aes(y =  High, colour="High Price")) +
+  geom_line(aes(y =  Low, colour="Low Price")) +
+  labs(title="Tesla Stock Price Over the Last 5 Years", x="Year", y="Tesla Stock Price ($)", colour = "Price") +
+  scale_color_manual(values = c("black", "steelblue","gold","darkviolet")) +
+  scale_x_date(date_minor_breaks = "1 month") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15))
+```
+
+The plot above shows the Daily Closing, Opening, High and Low Stock Prices. The spread of the lines indicates the fluctuations in Daily Stock Prices. The four lines stick together with little variation until early 2020, which is when we begin to see a lot more fluctuation in price but in general there is steep increase in stock price. We can examine the Closing Stock Price to get a clearer idea of this behavior.
+
+
+## Closing Stock Price
+```{r}
+#Plotting the Closing Stock Price over the last 5 years
+ggplot(tesla, aes(x=Date, y=Close.Last )) + 
+  geom_line() + 
+  labs(title="Tesla Closing Stock Price Over the Last 5 Years", x="Year", y="Tesla Closing Stock Price ($)") +
+  scale_x_date(date_minor_breaks = "1 month") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15))
+```
+
+As seen previously above there is a steep rise in the Tesla Stock Price since early 2020. Lets take a closer look at the stock price during this time.
+
+### Closing Stock Price since Jan 2020
+```{r}
+#Plotting the Stock Price since beginning of Jan 2020 onwards
+ggplot(tesla, aes(x=Date, y=Close.Last )) + 
+  geom_line() + 
+  labs(title="Tesla Closing Stock Price in 2020", x="Month", y="Tesla Closing Stock Price ($)") +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b", limit=c(as.Date("2020-01-01"),as.Date("2021-09-23"))) +
+  ylim(0,900) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15))
+```
+
+
+The stock price has continued to increase significantly since Jan 2020, reaching a peak around Feb 2021. 
+
+```{r}
+#The most recent stock price
+recent_stock <- tesla %>% filter(Date == max(tesla$Date))
+
+#Stock price at the beginning of 2020
+#Note: No data for date 2020-01-01
+stock_start_2020 <- tesla %>% filter(Date == as.Date("2020-01-02"))
+
+#Stock price at the end of 2020
+stock_end_2020 <- tesla %>% filter(Date == as.Date("2020-12-31"))
+
+#Calculating the percentage increase since the start of 2020 and the most recent date 
+pct_recent = round((((recent_stock$Close.Last-stock_start_2020$Close.Last)/stock_start_2020$Close.Last)*100),0) 
+
+#Calculating the percentage increase between the start and end of 2020 
+pct_2020 = round((((stock_end_2020$Close.Last-stock_start_2020$Close.Last)/stock_start_2020$Close.Last)*100),0) 
+
+cat("The stock price increase: \n Jan 2020-Present:",pct_recent,"% \n Jan 2020 - Dec 2020 End:",pct_2020,"%") 
+
+```
+The stock price has increased <b>776%</b> between the beginning of 2020 and the present. In fact, it increased by <b>720%</b> just in 2020 alone.
+
+## Moving Average
+```{r}
+#Plotting the Closing Stock price vs the 7 Day Moving Average
+ggplot(tesla, aes(x=Date)) + 
+  geom_line(aes(y = Close.Last, colour="Close Price")) + 
+  geom_line(aes(y =  Moving_Average_7_Day, colour="7 Day")) +
+  labs(title="Tesla Stock Price vs. 7 Day Moving Average", x="Year", y="Tesla Stock Price ($)", colour = "Price & Moving Average") +
+  scale_color_manual(values = c("black","tan3")) +
+  scale_x_date(date_minor_breaks = "1 month") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15))
+```
+
+```{r}
+#Plotting the Closing Stock price vs the 30 Day Moving Average
+ggplot(tesla, aes(x=Date)) + 
+  geom_line(aes(y = Close.Last, colour="Close Price")) + 
+  geom_line(aes(y =  Moving_Average_30_Day, colour="30 Day")) +
+  labs(title="Tesla Stock Price vs. 30 Day Moving Average", x="Year", y="Tesla Stock Price ($)", colour = "Price & Moving Average") +
+  scale_color_manual(values = c("black","orange")) +
+  scale_x_date(date_minor_breaks = "1 month") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15))
+```
+
+The 30 Day Moving Average gives us a much smoother curve than the 7 Day Moving Average. Therefore, using the 30 Day Moving Average we can clearly see the points where the stock price deviated noticeably from the predicted price. The stock price fluctuations seem to be most significant in the period after early 2020, which correlates with our earlier observation. 
+
+## Stock Trading Volume
+```{r}
+#Plotting the Closing Stock Price over the last 5 years
+ggplot(tesla, aes(x=Date, y=Volume, color ="orange")) + 
+  geom_point() +
+  geom_line(aes(y =  45000000, color="red")) +
+  labs(title="Tesla Stock Trading Volume Over the Last 5 Years", x="Year", y="Number of Stocks Traded") +
+  scale_x_date(date_minor_breaks = "1 month") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 10), axis.title.x = element_text(size = 12),
+        axis.text.y = element_text(size = 10), axis.title.y = element_text(size = 12),
+        plot.title = element_text(size = 15)) + 
+  theme(legend.position = "none") 
+```
+
+The volume of stocks traded has generally remained around or been under the average of 45 million (indicated by the line), however there is an increase in volume during the year 2020, though the it does seem to be getting back to normal since the beginning of 2021.
+
+# Summary of Data Analysis
+
+- Oldest data point is from <b>2016-11-07</b> and the most recent data point is from <b>2021-09-23</b>. 
+- Highest Closing Stock Price was <b>$883.09</b>, while the lowest Closing Stock Price <b>$35.79</b>.
+- Highest Opening Stock Price was <b>$891.38</b>, while the lowest Opening Stock Price <b>$36.22</b>.
+- The Highest Stock Price over the past 5 years was <b>$900.40</b>.
+- The Lowest Stock Price over the past 5 years was <b>$35.40</b>.
+- The Volume of Stocks traded averaged around <b>45 million</b> with a maximum of around <b>304 million</b>.  
+
+The Tesla Stock Price has increase significantly since 2016. The stock price remained relatively steady until early 2020 when it began to rise drastically. The stock price has increased <b>776%</b> between the beginning of 2020 and the present. In fact, it increased by <b>720%</b> just in 2020 alone. While the stock price reaches its peak around <b>Feb 2021</b>, it has continued its general upward trend. However, during the period of price increase the Daily stock price would fluctuate significantly compared to its relatively stable price prior to 2020. 
+
+The volume of stocks traded during the last 5 years has generally remained around or been under the average of 45 million, however there is an increase in volume during the year 2020, which corresponds to the steep increase in stock price. We would typically expect an increase in trading activity like this during a period when the company's stocks are rapidly rising. 
+
