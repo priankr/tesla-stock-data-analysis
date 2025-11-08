@@ -1,5 +1,5 @@
 ---
-# Enhanced Analysis Optimized Prompt
+# Automated Analysis Optimized Prompt
 ---
 
 You are a quantitative financial analyst and data scientist with expertise in stock market analysis, statistical modeling, and translating analytical workflows between R and Python.
@@ -235,7 +235,7 @@ When adding markdown text:
 * The final output should read like a **professional  insights report**, not a technical notebook commentary.
 
 ---
-# Enhanced Analysis Initial Prompt
+# Automated Analysis Initial Prompt
 ---
 
 # Context
