@@ -1,0 +1,165 @@
+---
+# Stock Analysis Comparison Optimized Prompt
+---
+<task>
+You are a financial analysis consultant specializing in AI-driven market research methodologies. Your client, an investment firm, conducted an experiment using four different AI approaches to analyze Tesla stock performance (Jan 1, 2021 - Dec 31, 2024). Your task is to evaluate which methodology delivers the most actionable investment insights.
+</task>
+
+<context>
+**Background:**
+The client analyzed Tesla's stock during a critical 4-year period that included:
+- Significant volatility across multiple market cycles
+- Tesla's all-time peak closing price on December 17, 2024
+- Major news events affecting stock performance
+
+**Four AI Approaches Tested:**
+
+1. **Enhanced Analysis** (tesla_stock_analysis.md)
+   - Method: AI reviewed existing R-based analysis, replicated it in Python, then drew new conclusions
+   - Goal: Uncover initially overlooked patterns by cross-validating methodologies
+
+2. **Automated Analysis - Claude** (tesla_stock_analysis_claude.md)
+   - Method: Claude Sonnet 4.5 conducted fresh analysis with complete freedom
+   - Goal: Generate unbiased insights with news contextualization
+
+3. **Automated Analysis - Perplexity** (tesla_stock_analysis_perplexity.md)
+   - Method: Perplexity (same model/prompt as Claude) conducted independent analysi
+   - Goal: Generate unbiased insights with news contextualization
+
+4. **Automated Analysis - Perplexity Research** (tesla_stock_analysis_perplexity_research.md)
+   - Method: Perplexity Research mode with extended research capabilities
+   - Goal: Generate unbiased insights with news contextualization
+
+**Dataset:** Nasdaq-sourced Tesla stock data (OHLCV + volume, Jan 2021 - Dec 2024)
+</context>
+
+<analysis_framework>
+Evaluate each approach across these dimensions:
+
+**1. Insight Quality Criteria**
+- **Depth:** Does the analysis go beyond surface-level observations?
+- **Actionability:** Could an investor make confident decisions based on these insights?
+- **Pattern Recognition:** Are non-obvious trends, correlations, or inflection points identified?
+- **Contextualization:** Is stock performance tied to specific news events, market conditions, or company actions?
+- **Forward-Looking Value:** Does it help predict or understand future performance drivers?
+
+**2. Critical Differentiators to Identify**
+- Which approach identified the most significant price drivers?
+- Which provided the clearest explanation of the Dec 17, 2024 peak?
+- Which uncovered insights the others missed?
+- Which balanced technical analysis with real-world context most effectively?
+- Which would help an investor understand *why* movements happened, not just *what* happened?
+
+**3. Practical Investment Utility**
+- If you could only read one analysis before making an investment decision, which would it be?
+- Which approach reveals risks or opportunities the others overlook?
+- Which saves the most time while delivering maximum insight?
+</analysis_framework>
+
+<output_requirements>
+Create a markdown document titled "Tesla Stock Analysis Comparison" with this structure:
+
+## Executive Summary
+[3-4 sentences capturing the key finding: which approach won and why, in plain language]
+
+## Methodology Overview
+[Brief table summarizing the four approaches - max 2 sentences per approach]
+
+| Approach | Method | Key Differentiator |
+|----------|--------|-------------------|
+| Enhanced Analysis | [description] | [what made it unique] |
+| Claude | [description] | [what made it unique] |
+| Perplexity | [description] | [what made it unique] |
+| Perplexity Research | [description] | [what made it unique] |
+
+## Comparative Analysis
+
+### Insight Quality Assessment
+[For each approach, provide a 2-3 paragraph evaluation covering:]
+- Standout insights that would help an investor
+- Notable patterns or connections identified
+- Strengths in explaining the December 2024 peak
+- Gaps or missed opportunities
+
+[Use subheadings for each approach: "Enhanced Analysis," "Claude," "Perplexity," "Perplexity Research"]
+
+### Direct Comparison: What Each Approach Revealed That Others Didn't
+[Create a comparison highlighting unique contributions - use a table or bullet format]
+
+### Real-World Application: Investment Decision Support
+[2-3 paragraphs analyzing: Which approach would best support actual buy/sell/hold decisions? Why?]
+
+## Recommendation
+
+### Recommended Approach: [Name of Winner]
+[2-3 paragraphs with clear reasoning:]
+- Why this approach outperformed others
+- Specific examples of superior insights
+- What made it most valuable for investment decisions
+
+### When to Use Alternative Approaches
+[1-2 paragraphs on scenarios where other methods might be preferable]
+
+### Implementation Guidance
+[Practical next steps: How should the client use this winning approach going forward?]
+
+## Appendix: Evaluation Criteria
+[Brief summary of the framework used to compare approaches]
+
+</output_requirements>
+
+<style_guidelines>
+- **Tone:** Professional yet accessible - imagine you're presenting to portfolio managers, not data scientists
+- **Language:** Avoid technical jargon (e.g., say "price movement" not "volatility clustering")
+- **Structure:** Use tables for direct comparisons, paragraphs for nuanced analysis
+- **Conciseness:** Every sentence should add value - no filler
+- **Specificity:** Reference concrete examples from the analyses (e.g., "The Enhanced Analysis uniquely identified...")
+- **Neutrality:** Be objective in evaluation, but decisive in your recommendation
+</style_guidelines>
+
+<critical_success_factors>
+- Your comparison must be **evidence-based** - cite specific insights from each document
+- The recommendation must be **justified** - not just opinion, but reasoned analysis
+- The output must answer: "Which method should we use for our next stock analysis?"
+- An investor reading this should understand exactly what they gain from each approach
+- Avoid treating all approaches as equally valuable if they're not - differentiate clearly
+</critical_success_factors>
+
+---
+# Stock Analysis Comparison Initial Prompt
+---
+# Context
+I have the results of data analysis on Tesla stock using four approaches. The goal was to produce an informative report outlining the Tesla stock's performance from January 1, 2021, to December 31, 2024. I wanted to understand the key trends and news events that drove stock performance during this period. Tesla also hit an all-time peak closing price on December 17, 2024. I also wanted context on this peak. The overall objective is to understand the stock’s performance, especially around noteworthy periods (e.g., historic highs or lows). 
+
+## Dataset Context
+The dataset contains Tesla stock data (Jan 1, 2021 - Dec 31, 2024) from Nasdaq.
+
+## Approach Context
+- **Enhanced Analysis**: The AI model was instructed to review the data analysis in R, replicate the analysis in Python, and draw **new conclusions** based on the results of this analysis. The goal was to reveal interesting patterns, observations, or details that were initially overlooked.
+- **Automated Analysis:** The AI model was instructed to review the dataset and generate a **new analysis** from scratch. The goal was to improve the *quality* of insights obtained by giving the model complete freedom to conduct the analysis, without being influenced by the existing analysis, and to contextualize the observed trends using relevant data from news sources. We used the same prompt and the same model (Sonnet 4.5) across three different tools: Claude, Perplexity, and Perplexity Research.
+
+## Inputs
+- **Enhanced Analysis**: tesla_stock_analysis.md
+- **Automated Analysis (Claude)**: tesla_stock_analysis_claude.md
+- **Automated Analysis (Perplexity)**: tesla_stock_analysis_perplexity.md
+- **Automated Analysis (Perplexity Research)**: tesla_stock_analysis_perplexity_research.md
+
+
+# Task
+Analyze and compare the insights generated in each scenario. Determine the following 
+- How did the *quality* of insights in each AI approach vary?
+- Which approach would give a potential investor the greatest insight into the stock performance?
+
+## Outputs
+- **Overview Comparison** - A markdown file with a comprehensive comparison.
+
+# Requirements
+- Compare the four approaches, noting differences in the quality of insights of each approach. 
+- Provide a recommendation (along with supporting reasoning) for which approach should be adopted in the future. 
+
+## Tone and Style Requirements
+* Write in a **clear, executive tone** suitable for individual investors seeking insights into stock performance.
+* Prioritize **readability and structure** — use concise paragraphs, tables, or bullet points where appropriate.
+* Avoid jargon; favor **plain, analytical English** that non-technical readers can understand.
+* The final output should read like a **professional insights report**, not a technical commentary.
+---

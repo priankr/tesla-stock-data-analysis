@@ -1,0 +1,155 @@
+---
+# Automated Analysis Optimized Prompt
+---
+
+You are a financial analyst specializing in equity research and market trend analysis. I need your expertise to correlate news events with Tesla (TSLA) stock price movements.
+
+<context>
+I have Tesla stock data from January 1, 2021 to December 31, 2024. The stock reached an all-time peak closing price on December 17, 2024. I'm conducting a comprehensive analysis to understand what drove stock performance during this period and specifically what catalyzed the all-time high.
+</context>
+
+<task>
+Using your search capabilities, identify and analyze the relationship between major news events and Tesla's stock price trends during this 4-year period.
+</task>
+
+<analysis_framework>
+
+**PART 1: Chronological Trend Analysis (2021-2024)**
+
+For each calendar year, identify 2-3 major stock price trends (rallies, declines, or high-volatility periods). For each trend:
+
+1. **Trend Identification**
+   - Approximate date range (e.g., "March 2021 - June 2021")
+   - Trend type: Rally, Decline, Consolidation, or High Volatility
+   - Approximate magnitude (if available in news: e.g., "stock rose ~40%")
+
+2. **News Correlation**
+   - 3-5 specific news events during this period with exact dates
+   - Direct quotes or key facts from articles
+   - Source citations (prioritize: Reuters, Bloomberg, WSJ, Financial Times, CNBC, Associated Press)
+   
+3. **Categorization**
+   Mark each news item as:
+   - [COMPANY] Company-specific: earnings, deliveries, production, product launches, executive changes
+   - [MACRO] Macroeconomic: Fed policy, inflation, recession fears, market-wide movements
+   - [INDUSTRY] EV industry/competition: rival announcements, supply chain, regulations
+   - [MUSK] Elon Musk-related: Twitter/X acquisition, public statements, controversies
+   - [POLICY] Government/regulatory: tax credits, investigations, policy changes
+
+4. **Causation Assessment**
+   - Rate the likely impact: HIGH / MEDIUM / LOW
+   - Note whether news preceded or followed price movement
+   - Flag if multiple factors coincided
+
+**PART 2: All-Time Peak Analysis (December 17, 2024)**
+
+Provide a focused investigation of the December 17, 2024 peak:
+
+1. **Q4 2024 Build-Up (October 1 - December 16, 2024)**
+   - List 5-8 major news events/catalysts in chronological order
+   - Include: earnings reports, delivery numbers, product news, political developments, analyst upgrades
+   - Specify exact dates and sources
+
+2. **Immediate Catalysts (December 1-17, 2024)**
+   - Identify any specific triggers in the 2 weeks before the peak
+   - Include market sentiment, sector rotation, year-end positioning if relevant
+
+3. **Peak Day Context (December 17, 2024)**
+   - What news or developments occurred on or immediately before this date?
+   - Broader market conditions (S&P 500, Nasdaq performance, sector trends)
+   - Trading volume or technical factors mentioned in news
+
+4. **Synthesis**
+   - What appears to be the primary catalyst(s) for the all-time high?
+   - Were there multiple reinforcing factors?
+   - Any contrarian viewpoints or skepticism mentioned in coverage?
+
+</analysis_framework>
+
+<research_requirements>
+- **Only use verifiable sources**: Major financial news outlets, press releases, SEC filings
+- **Provide exact dates**: Use format "Month DD, YYYY" for all events
+- **Include direct evidence**: Brief quotes or specific data points from articles
+- **Distinguish fact from speculation**: Clearly label analyst predictions vs. confirmed news
+- **Show temporal relationships**: Explicitly note if news came before/during/after price movements
+- **Cite every claim**: Use format [Source Name, Date] after each news reference
+</research_requirements>
+
+<output_structure>
+Organize your response as follows:
+
+## 2021 Trends
+[Trend 1: Date Range, Type]
+[Trend 2: Date Range, Type]
+[etc.]
+
+## 2022 Trends
+[Repeat structure]
+
+## 2023 Trends
+[Repeat structure]
+
+## 2024 Trends
+[Repeat structure]
+
+---
+
+## December 17, 2024 Peak Analysis
+
+### Q4 2024 Build-Up
+[Chronological list of events]
+
+### December 1-17 Immediate Period
+[Recent catalysts]
+
+### Peak Day Context
+[Specific December 17 factors]
+
+### Synthesis
+[Your analytical conclusion on what drove the all-time high]
+
+</output_structure>
+
+<critical_notes>
+- If you cannot find news for a specific trend period, state this explicitly rather than speculating
+- When multiple explanations exist, present all credible perspectives
+- Flag any periods where stock movements seem disconnected from news flow
+- Note if certain news categories (e.g., Musk-related) consistently correlate with volatility
+</critical_notes>
+
+Begin your analysis with 2021 and proceed chronologically through to the December 2024 peak.
+
+---
+# Automated Analysis Initial Prompt
+---
+
+# Context
+I'm analyzing Tesla (TSLA) stock performance from January 1, 2021, to December 31, 2024. Tesla hit an all-time peak closing price on December 17, 2024. Please help me understand the key trends and news events that drove stock performance during this period.
+## Major Trend Analysis
+Identify and explain the major trends in Tesla's stock price during 2021-2024, focusing on:
+- Significant upward trends (rallies)
+- Significant downward trends (corrections/declines)
+- Periods of consolidation or volatility
+
+- For each major trend, provide:
+	- The approximate time period
+	- Key news events, announcements, or developments that drove the trend (cite specific dates and reliable sources like Reuters, Bloomberg, CNBC, Wall Street Journal, Financial Times, Associated Press)
+	- Whether the news related to: company-specific events (earnings, production, new products), macroeconomic factors (interest rates, inflation), industry developments, regulatory changes, or Elon Musk-related news
+
+## All-Time Peak Analysis (December 17, 2024)
+Provide a detailed analysis of what led to Tesla reaching its all-time peak closing price on December 17, 2024:
+- Key catalysts in the weeks/months leading up to December 17, 2024
+- Specific news, announcements, or market conditions from Q4 2024
+- Any immediate triggers in mid-December 2024
+- Broader market sentiment or sector trends that may have contributed
+
+# Requirements:
+- Only cite reliable, mainstream financial news sources
+- Provide specific dates for major news events
+- Include actual quotes or key details from articles when relevant
+- Distinguish between confirmed news and market speculation
+- Note any correlation between news timing and stock price movements
+
+Please structure your response with clear sections for each major trend period, then conclude with the December 17, 2024, peak analysis.
+
+---

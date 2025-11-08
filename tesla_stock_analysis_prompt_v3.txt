@@ -1,0 +1,263 @@
+---
+# Enhanced Analysis Optimized Prompt
+---
+
+You are a quantitative financial analyst and data scientist with expertise in stock market analysis, statistical modeling, and translating analytical workflows between R and Python.
+
+<context>
+I previously analyzed Tesla (TSLA) stock data from January 1, 2021 to an earlier end date using R. I now have an updated dataset extending through December 31, 2024, and I want to:
+1. Replicate my original R analysis in Python
+2. Apply it to the updated dataset
+3. Identify new insights that the extended timeframe reveals
+4. Enhance the documentation quality
+
+**My goal**: Discover patterns, trends, or relationships that weren't visible in the shorter timeframe, while maintaining analytical rigor and improving presentation.
+</context>
+
+<attached_files>
+- **tesla_stock.Rmd** - Original R Notebook containing: dataset description, methodology, code, visualizations, and initial insights
+- **tesla_stock_dataset.csv** - Updated Tesla stock data (Jan 1, 2021 - Dec 31, 2024)
+</attached_files>
+
+<task_workflow>
+
+## PHASE 1: Analysis Comprehension (Do First)
+
+Carefully review the R Notebook and document:
+
+1. **Dataset Structure**
+   - What columns/variables are present?
+   - What is the date range of the original data?
+   - Any data preprocessing steps performed?
+
+2. **Analytical Methods Employed**
+   - Statistical techniques used (moving averages, volatility metrics, correlation, etc.)
+   - Visualization types created
+   - Key metrics calculated
+
+3. **Original Insights Documented**
+   - List the main conclusions from the R analysis
+   - Note which time periods were highlighted as significant
+   - Identify any limitations mentioned
+
+**Output this phase as**: A brief summary (3-5 bullets) showing you understand the original analysis before proceeding.
+
+---
+
+## PHASE 2: Python Translation & Execution
+
+1. **Package Mapping**
+   Identify Python equivalents for all R packages/functions used:
+   - R's dplyr → pandas
+   - R's ggplot2 → matplotlib/seaborn/plotly
+   - R's specific statistical functions → scipy.stats/statsmodels/numpy
+   - Document any methodology adjustments needed
+
+2. **Load Updated Dataset**
+```python
+   import pandas as pd
+   import numpy as np
+   import matplotlib.pyplot as plt
+   import seaborn as sns
+   # [other necessary imports]
+   
+   df = pd.read_csv('tesla_stock_dataset.csv')
+   # [data validation and preprocessing]
+```
+
+3. **Replicate Original Analysis**
+   - Reproduce each analytical step from the R notebook
+   - Maintain the same calculation methodologies where possible
+   - Generate equivalent visualizations
+   - **Validate**: Ensure results for the overlapping time period match the R analysis
+
+4. **Extend Analysis to Full Dataset**
+   - Apply all methods to the complete 2021-2024 dataset
+   - Generate updated versions of all original visualizations
+   - Calculate all original metrics on the full timeframe
+
+---
+
+## PHASE 3: Enhanced Insight Discovery
+
+**Your primary value-add**: Identify insights that emerge from the extended dataset that weren't visible before.
+
+**Systematic Approach to Finding New Insights:**
+
+1. **Temporal Comparison**
+   - How do patterns in 2023-2024 differ from earlier years?
+   - Did trends identified in the original analysis continue, reverse, or evolve?
+   - Are there new cyclical patterns visible over the 4-year period?
+
+2. **Volatility & Distribution Analysis**
+   - Has volatility character changed over time?
+   - Are there new outlier events in the extended period?
+   - How does the distribution of returns compare across years?
+
+3. **Trend Evolution**
+   - Which trends from the original analysis proved durable?
+   - What new long-term trends emerged that required 4 years of data to detect?
+   - Any inflection points or regime changes?
+
+4. **Statistical Significance**
+   - Do correlations that appeared significant in shorter timeframe hold over 4 years?
+   - Are there relationships that only become apparent with more data?
+
+5. **Context Integration**
+   - Note: You may reference that December 17, 2024 was Tesla's all-time peak closing price
+   - How does the path to this peak compare to earlier rallies?
+
+**Critical Instruction**: Focus on insights that are:
+- ✅ Supported by clear data evidence (reference specific dates, metrics, or visualizations)
+- ✅ Non-obvious (wouldn't be immediately apparent from glancing at a price chart)
+- ✅ Actionable or meaningful for understanding Tesla's stock behavior
+- ❌ Not speculative or dependent on external news (focus on what the data shows)
+
+---
+
+## PHASE 4: Documentation Enhancement
+
+**Do NOT modify the Python code cells.** Only enhance markdown cells.
+
+**Markdown Improvements Required:**
+
+1. **Section Headers**
+   - Add clear, descriptive headers for each analytical section
+   - Use hierarchy (##, ###) to create logical flow
+   - Include purpose statements: "This section examines..."
+
+2. **Methodology Documentation**
+   - Before each analytical step, explain WHAT you're calculating and WHY
+   - Example: "We calculate 20-day moving average to smooth short-term noise and identify medium-term trends"
+   - Document any assumptions or parameter choices
+
+3. **Insight Callouts**
+   Format new insights prominently:
+```markdown
+   ### Key Insight: [Descriptive Title]
+   
+   **Finding**: [Clear statement of what the data shows]
+   
+   **Evidence**: [Reference to specific metric, date range, or visualization]
+   
+   **Significance**: [Why this matters / what it reveals about Tesla's stock behavior]
+```
+
+4. **Visualization Context**
+   - Before each chart: What question does this visualization answer?
+   - After each chart: What is the primary takeaway? (1-2 sentences)
+
+5. **Comparative Notes**
+   - When relevant, add markdown noting how current findings compare to original R analysis
+   - Format: "**Update from original analysis**: [comparison]"
+
+6. **Executive Summary**
+   - Add a markdown cell at the top summarizing the 3-5 most important findings
+   - Make this scannable for someone who won't read the full notebook
+
+---
+
+## PHASE 5: Quality Review
+
+Before delivering, verify:
+
+- [ ] All original R analyses are successfully replicated in Python
+- [ ] All code executes without errors on the new dataset
+- [ ] Every visualization has explanatory markdown before/after
+- [ ] At least 5 genuinely new insights are documented (beyond original R analysis)
+- [ ] Insights reference specific evidence (dates, metrics, chart features)
+- [ ] Markdown is well-structured with clear headers and hierarchy
+- [ ] Executive summary accurately reflects main findings
+- [ ] No code modifications (only dataset update and markdown enhancement)
+
+</task_workflow>
+
+<output_specifications>
+
+**Deliverable**: Updated Jupyter Notebook (.ipynb file) containing:
+
+1. **Executive Summary** (new markdown cell at top)
+   - 3-5 bullet points of key findings
+   - Highlight what's new vs. original analysis
+
+2. **Replicated Analysis** (code + enhanced markdown)
+   - All original R analytical steps in Python
+   - Updated dataset (2021-2024)
+   - Improved documentation throughout
+
+3. **New Insights Section** (new markdown cells)
+   - Clearly marked as "New Insights from Extended Dataset"
+   - 5-10 formatted insight callouts
+   - Direct references to supporting visualizations/metrics
+
+4. **Methodology Documentation** (enhanced existing markdown)
+   - Clear explanations of each analytical technique
+   - Rationale for parameters chosen
+   - Interpretation guidance for metrics
+
+**Formatting Standards:**
+- Use consistent markdown hierarchy (##, ###)
+- Include inline formatting: **bold** for key terms, `code style` for variables
+- Add horizontal rules (---) to separate major sections
+- Use blockquotes (>) for important cautionary notes
+
+</output_specifications>
+
+<critical_constraints>
+
+**DO:**
+- ✅ Translate R methodology faithfully to Python
+- ✅ Apply analysis to full 2021-2024 dataset
+- ✅ Add substantial markdown enhancements
+- ✅ Identify insights unique to the extended timeframe
+- ✅ Reference specific data points and visualizations
+- ✅ Improve documentation clarity and structure
+
+**DO NOT:**
+- ❌ Add new analytical methods not in the original R notebook
+- ❌ Speculate about causes without data support
+- ❌ Remove or reduce any original analyses
+- ❌ Create insights that aren't grounded in the actual data patterns
+
+</critical_constraints>
+
+---
+# Python Notebook Generation Prompt
+---
+
+Convert the Python code used for the analysis into a Jupyter Notebook that also contains the key observations from the data analysis. 
+
+## Tone and Style Requirements 
+When adding markdown text: 
+* Write in a **clear, executive tone**  
+* Prioritize **readability and structure** — use concise paragraphs, tables, or bullet points where appropriate. 
+* Avoid jargon; favor **plain, analytical English** that non-technical readers can understand. 
+* The final output should read like a **professional  insights report**, not a technical notebook commentary.
+
+---
+# Enhanced Analysis Initial Prompt
+---
+
+# Context
+I'm analyzing Tesla (TSLA) stock performance from January 1, 2021, to December 31. I want to understand the key trends and news events that drove stock performance during this period. I ran a previous analysis on an older Tesla stock dataset using R. I have the previous analysis attached. I want to use AI to review my original analysis, run the analysis using an updated dataset in Python, and generate an updated analysis that reveals deeper insights. 
+
+## Inputs
+- **Data Analysis**: An R Notebook containing the data analysis, along with details about the dataset, the analysis methodology, data analysis results, visualizations, and insights. → tesla_stock.Rmd
+- **Dataset:** A file containing the Tesla stock data → tesla_stock_dataset.csv
+
+# Task
+Review the existing data analysis, run the analysis with the updated dataset, and draw new conclusions based on the results of this analysis. The goal is to reveal interesting patterns, observations, or details that were initially overlooked.  
+
+# Requirements
+- Analyze the existing files provided and understand the initial analysis.
+- Identify the comparable packages in Python necessary to perform the same analysis in Python.
+- Run the analysis with the new dataset in Python and analyze the insights generated.
+- Review the analysis methodology documentation and improve the quality of the documentation.
+- Use the initial insights and observations as a reference, and identify **new** insights that were missed in the original analysis. 
+- Focus on highlighting interesting patterns, connections, and observations in the data
+- Do not update the Python code itself. Only update the dataset and text in the markdown cells to enhance the readability and to highlight new insights you have spotted. 
+- Review the results and highlight insights recorded in the markdown cells. 
+## Outputs
+- **Updated Python Data Analysis** - An updated Jupyter Notebook
+
+---
