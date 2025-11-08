@@ -14,7 +14,7 @@ library(gghighlight)
 library(forecast)
 
 #Importing the csv file to a Data Frame
-tesla <- read.csv("tesla_stock.csv")
+tesla <- read.csv("tesla_stock_dataset_old.csv")
 
 #Viewing the Data Frame
 head(tesla)
