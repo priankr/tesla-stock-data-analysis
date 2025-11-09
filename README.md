@@ -39,7 +39,7 @@ The project compares four approaches:
 
 | File | Description |
 | --- | --- |
-| Tesla Stock Data (CSV) | Historical stock price data from NASDAQ containing date, open/close prices, daily high/low, and trading volume over 4 years |
+| `tesla_stock_dataset.csv`| Historical stock price data from NASDAQ containing date, open/close prices, daily high/low, and trading volume over 4 years |
 | `tesla_stock.Rmd` | Original R Markdown notebook with baseline data analysis, including methodology, visualizations, and initial insights on Tesla stock performance |
 
 ### Analysis Prompts
@@ -62,10 +62,10 @@ The project compares four approaches:
 
 | File | Description |
 | --- | --- |
-| Enhanced Analysis Output (Markdown) | AI-generated insights from reviewing and enhancing the existing R analysis |
-| Claude Analysis Output (Markdown) | Comprehensive analysis with causal quantification, catalyst weighting, and investment insights |
-| Perplexity Analysis Output (Markdown) | Analysis emphasizing volume-based technical context and contextual event timing |
-| Perplexity Research Output (Markdown) | Detailed research report with extensive event documentation and regulatory precision |
+| `tesla_stock_analysis.md` | AI-generated insights from reviewing and enhancing the existing R analysis |
+| `tesla_stock_analysis_claude.md` | Comprehensive analysis with causal quantification, catalyst weighting, and investment insights |
+| `tesla_stock_analysis_perplexity.md` | Analysis emphasizing volume-based technical context and contextual event timing |
+| `tesla_stock_analysis_perplexity_research.md` | Detailed research report with extensive event documentation and regulatory precision |
 | `tesla_stock_analysis_comparison.md` | Comparative analysis evaluating the quality, depth, and uniqueness of insights across all four approaches |
 
 ---
